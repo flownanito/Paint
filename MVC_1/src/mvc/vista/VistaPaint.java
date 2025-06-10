@@ -21,75 +21,83 @@ public class VistaPaint extends JFrame {
     public JPanel lienzo;
 
     public VistaPaint() {
-        super("Paint - MVC");
+        super("? Paint - MVC Estilo Moderno");
         setLayout(null);
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        // Estilo general
+        Font fuente = new Font("Segoe UI", Font.PLAIN, 14);
+        Color colorFondo = new Color(245, 245, 245);
+        Color colorBoton = new Color(66, 133, 244);
+        Color colorTexto = Color.WHITE;
+
+        getContentPane().setBackground(colorFondo);
+
         // Panel de herramientas
-        JPanel panelHerramientas = new JPanel();
-        panelHerramientas.setLayout(null);
+        JPanel panelHerramientas = new JPanel(null);
         panelHerramientas.setBounds(10, 10, 200, 540);
+        panelHerramientas.setBackground(new Color(230, 230, 230));
+        panelHerramientas.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
         add(panelHerramientas);
 
-        // Botones de figuras
-        botonPunto = new JButton("Punto");
+        botonPunto = crearBoton("Punto", fuente, colorBoton, colorTexto);
         botonPunto.setBounds(10, 10, 180, 30);
         panelHerramientas.add(botonPunto);
 
-        botonLinea = new JButton("Línea");
+        botonLinea = crearBoton("Línea", fuente, colorBoton, colorTexto);
         botonLinea.setBounds(10, 50, 180, 30);
         panelHerramientas.add(botonLinea);
 
-        botonCirculo = new JButton("Círculo");
+        botonCirculo = crearBoton("Círculo", fuente, colorBoton, colorTexto);
         botonCirculo.setBounds(10, 90, 180, 30);
         panelHerramientas.add(botonCirculo);
 
-        botonPoligonoRegular = new JButton("Polígono Regular");
+        botonPoligonoRegular = crearBoton("Polígono Regular", fuente, colorBoton, colorTexto);
         botonPoligonoRegular.setBounds(10, 130, 180, 30);
         panelHerramientas.add(botonPoligonoRegular);
 
-        botonPoligonoIrregular = new JButton("Polígono Irregular");
+        botonPoligonoIrregular = crearBoton("Polígono Irregular", fuente, colorBoton, colorTexto);
         botonPoligonoIrregular.setBounds(10, 170, 180, 30);
         panelHerramientas.add(botonPoligonoIrregular);
 
-        // Configuración de colores
-        botonColor = new JButton("Color");
+        botonColor = crearBoton("Color", fuente, new Color(52, 168, 83), colorTexto);
         botonColor.setBounds(10, 210, 85, 30);
         panelHerramientas.add(botonColor);
 
-        botonColorRelleno = new JButton("Color Relleno");
+        botonColorRelleno = crearBoton("Color Relleno", fuente, new Color(234, 67, 53), colorTexto);
         botonColorRelleno.setBounds(105, 210, 85, 30);
         panelHerramientas.add(botonColorRelleno);
 
-        // Configuración de polígonos
         checkboxRelleno = new JCheckBox("Relleno");
         checkboxRelleno.setBounds(10, 250, 180, 30);
+        checkboxRelleno.setBackground(panelHerramientas.getBackground());
+        checkboxRelleno.setFont(fuente);
         panelHerramientas.add(checkboxRelleno);
 
         etiquetaLados = new JLabel("Lados: 5");
         etiquetaLados.setBounds(10, 290, 180, 20);
+        etiquetaLados.setFont(fuente);
         panelHerramientas.add(etiquetaLados);
 
         sliderLados = new JSlider(3, 12, 5);
         sliderLados.setBounds(10, 310, 180, 50);
         panelHerramientas.add(sliderLados);
 
-        // Operaciones CRUD
-        botonGuardar = new JButton("Guardar Dibujo");
+        botonGuardar = crearBoton("Guardar Dibujo", fuente, colorBoton, colorTexto);
         botonGuardar.setBounds(10, 370, 180, 30);
         panelHerramientas.add(botonGuardar);
 
-        botonCargar = new JButton("Cargar Dibujo");
+        botonCargar = crearBoton("Cargar Dibujo", fuente, colorBoton, colorTexto);
         botonCargar.setBounds(10, 410, 180, 30);
         panelHerramientas.add(botonCargar);
 
-        botonEliminar = new JButton("Eliminar Dibujo");
+        botonEliminar = crearBoton("Eliminar Dibujo", fuente, new Color(219, 68, 55), colorTexto);
         botonEliminar.setBounds(10, 450, 180, 30);
         panelHerramientas.add(botonEliminar);
 
-        botonGenerarSVG = new JButton("Generar SVG");
+        botonGenerarSVG = crearBoton("Generar SVG", fuente, colorBoton, colorTexto);
         botonGenerarSVG.setBounds(10, 490, 180, 30);
         panelHerramientas.add(botonGenerarSVG);
 
@@ -104,9 +112,22 @@ public class VistaPaint extends JFrame {
         };
         lienzo.setBounds(220, 10, 560, 540);
         lienzo.setBackground(Color.WHITE);
-        lienzo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        lienzo.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(180, 180, 180), 1),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
         add(lienzo);
 
         setVisible(true);
+    }
+
+    private JButton crearBoton(String texto, Font fuente, Color fondo, Color textoColor) {
+        JButton boton = new JButton(texto);
+        boton.setFont(fuente);
+        boton.setBackground(fondo);
+        boton.setForeground(textoColor);
+        boton.setFocusPainted(false);
+        boton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        return boton;
     }
 }

@@ -14,14 +14,18 @@ public class Punto extends Figura {
     }
     
     @Override
-    public void dibujar(Graphics2D g) {
-        g.setColor(color);
-        g.drawLine(punto.x, punto.y, punto.x, punto.y);
-    }
+public void dibujar(Graphics2D g) {
+    g.setColor(color);
+    int radio = 2; // Puedes ajustar este valor para que sea más o menos gordo
+    g.fillOval(punto.x - radio, punto.y - radio, radio * 2, radio * 2);
+}
+
     
-    @Override
-    public String toSVG() {
-        return String.format("<circle cx=\"%d\" cy=\"%d\" r=\"1\" fill=\"rgb(%d,%d,%d)\"/>",
-            punto.x, punto.y, color.getRed(), color.getGreen(), color.getBlue());
-    }
+@Override
+public String toSVG() {
+    int radio = 5;
+    return String.format("<circle cx=\"%d\" cy=\"%d\" r=\"%d\" fill=\"rgb(%d,%d,%d)\"/>",
+        punto.x, punto.y, radio, color.getRed(), color.getGreen(), color.getBlue());
+}
+
 }
